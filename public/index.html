@@ -54,8 +54,15 @@
         </div>
 
         <div id="summary-cards" class="cards"></div>
-        <div id="monitor-list" class="monitor-list" role="list"></div>
+        <p id="load-error" class="error-banner hidden"></p>
+        <div id="loading-skeleton">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+        <div class="monitor-list" id="monitor-list" role="list"></div>
         <p id="empty-state" class="muted center hidden">No monitors yet. Create your first one above.</p>
+
+        <h2 style="margin-top:2rem">Recent activity</h2>
+        <div id="activity-feed" class="card" aria-live="polite"><p class="muted">Loading…</p></div>
       </main>
     </section>
   </div>
