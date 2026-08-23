@@ -1,0 +1,54 @@
+{
+  "name": "nexusflow",
+  "version": "1.0.0",
+  "description": "NexusFlow - Autonomous Event-Driven Multi-Agent Saga & Durable Workflow Engine",
+  "main": "dist/index.js",
+  "scripts": {
+    "build:server": "tsc -p tsconfig.server.json",
+    "build:client": "vite build",
+    "build": "npm run build:server && npm run build:client",
+    "start": "ts-node src/server/index.ts",
+    "server": "ts-node src/server/index.ts",
+    "dev": "vite",
+    "test": "npx tsx src/test/runner.ts",
+    "cli": "npx tsx src/cli/nexus-cli.ts",
+    "bench": "npx tsx src/cli/nexus-cli.ts bench --concurrency 50 --runs 200"
+  },
+  "keywords": [
+    "workflow-engine",
+    "saga-pattern",
+    "durable-execution",
+    "multi-agent",
+    "observability",
+    "hitl",
+    "event-sourcing"
+  ],
+  "author": "NexusFlow Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "lucide-react": "^0.475.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ws": "^8.18.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/ws": "^8.5.14",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}
