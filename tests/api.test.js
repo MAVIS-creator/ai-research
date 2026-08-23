@@ -191,23 +191,41 @@ describe('checking & incidents', () => {
   });
 
   it('opens an incident when the target goes down and resolves on recovery', async () => {
-    // Simulate a failing check directly through the checker's record path.
+    // Monitor created with default thresholds (fail≥2, recover≥2).
     const checker = await import('../src/monitors/checker.js');
-    checker.recordCheck(liveMonitorId, { status: 'down', httpStatus: null, durationMs: 10, error: 'boom' });
+    const fail = () => ({ status: 'down', httpStatus: null, durationMs: 10, error: 'boom' });
+    const ok = () => ({ status: 'up', httpStatus: 200, durationMs: 5, error: null });
+
+    // First failure → degraded, NO incident yet.
+    checker.recordCheck(liveMonitorId, fail());
     let incidentsRes = await request()
       .get(`/api/monitors/${liveMonitorId}/incidents?open=true`)
       .set('authorization', `Bearer ${token}`);
-    expect(incidentsRes.body.incidents).toHaveLength(1);
+    expect(incidentsRes.body.incidents).toHaveLength(0);
 
-    // A second failure must NOT open a second incident.
-    checker.recordCheck(liveMonitorId, { status: 'down', httpStatus: null, durationMs: 10, error: 'still down' });
+    // Second consecutive failure → incident opens.
+    checker.recordCheck(liveMonitorId, fail());
     incidentsRes = await request()
       .get(`/api/monitors/${liveMonitorId}/incidents?open=true`)
       .set('authorization', `Bearer ${token}`);
     expect(incidentsRes.body.incidents).toHaveLength(1);
 
-    // Recovery resolves it.
-    checker.recordCheck(liveMonitorId, { status: 'up', httpStatus: 200, durationMs: 5, error: null });
+    // Further failures must NOT open a second incident.
+    checker.recordCheck(liveMonitorId, fail());
+    incidentsRes = await request()
+      .get(`/api/monitors/${liveMonitorId}/incidents?open=true`)
+      .set('authorization', `Bearer ${token}`);
+    expect(incidentsRes.body.incidents).toHaveLength(1);
+
+    // One success is not enough to resolve (recovery threshold 2)…
+    checker.recordCheck(liveMonitorId, ok());
+    incidentsRes = await request()
+      .get(`/api/monitors/${liveMonitorId}/incidents?open=true`)
+      .set('authorization', `Bearer ${token}`);
+    expect(incidentsRes.body.incidents).toHaveLength(1);
+
+    // …but the second consecutive success resolves it.
+    checker.recordCheck(liveMonitorId, ok());
     incidentsRes = await request()
       .get(`/api/monitors/${liveMonitorId}/incidents?open=true`)
       .set('authorization', `Bearer ${token}`);
