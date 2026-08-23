@@ -51,3 +51,57 @@ export function recentChecks(monitorId, limit = 50) {
     )
     .all(monitorId, limit);
 }
+
+/**
+ * Response-time series bucketed into N points over a trailing window.
+ * Returns oldest → newest arrays suitable for charting.
+ */
+export function responseTimeSeries(monitorId, { windowHours = 24, buckets = 48 } = {}) {
+  const sinceIso = new Date(Date.now() - windowHours * 3600_000).toISOString();
+  const rows = db
+    .prepare(
+      `SELECT duration_ms AS durationMs, status, checked_at AS checkedAt
+       FROM checks WHERE monitor_id = ? AND checked_at >= ?
+       ORDER BY checked_at ASC`
+    )
+    .all(monitorId, sinceIso);
+  if (rows.length === 0) return [];
+
+  const bucketMs = (windowHours * 3600_000) / buckets;
+  const startMs = Date.now() - windowHours * 3600_000;
+  const out = Array.from({ length: buckets }, () => ({ count: 0, sum: 0, max: 0, down: 0 }));
+  for (const r of rows) {
+    const idx = Math.min(buckets - 1, Math.max(0, Math.floor((Date.parse(r.checkedAt) - startMs) / bucketMs)));
+    out[idx].count += 1;
+    out[idx].sum += r.durationMs;
+    out[idx].max = Math.max(out[idx].max, r.durationMs);
+    if (r.status === 'down') out[idx].down += 1;
+  }
+  return out.map((b, i) => ({
+    t: new Date(startMs + i * bucketMs).toISOString(),
+    avgMs: b.count ? Math.round(b.sum / b.count) : null,
+    maxMs: b.count ? b.max : null,
+    downCount: b.down,
+  }));
+}
+
+/** Aggregate stats for dashboard cards. */
+export function monitorStats(monitorId) {
+  const since24 = new Date(Date.now() - 24 * 3600_000).toISOString();
+  const row = db
+    .prepare(
+      `SELECT COUNT(*) AS total,
+              SUM(CASE WHEN status = 'up' THEN 1 ELSE 0 END) AS up,
+              AVG(duration_ms) AS avgDuration,
+              MIN(duration_ms) AS minDuration,
+              MAX(duration_ms) AS maxDuration
+       FROM checks WHERE monitor_id = ? AND checked_at >= ?`
+    )
+    .get(monitorId, since24);
+  return {
+    totalChecks24h: row?.total ?? 0,
+    avgResponseMs: row?.avgDuration != null ? Math.round(row.avgDuration) : null,
+    minResponseMs: row?.minDuration ?? null,
+    maxResponseMs: row?.maxDuration ?? null,
+  };
+}
