@@ -2,6 +2,25 @@
 
 Self-hosted uptime monitoring with a real-time dashboard and a public status page — a lightweight, privacy-friendly alternative to Pingdom/StatusPage that you own end to end.
 
+## About this project (AI Engineering Research Experiment)
+
+PulseWatch was developed and evaluated as part of an **AI-assisted software
+engineering research experiment** exploring autonomous development workflows.
+
+- **Primary development**: Stealth / **Ox Alpha** (autonomous implementation,
+  architecture, debugging, testing, and verification)
+- **Contributors**: GitHub Copilot (Ox Alpha) — pair implementation, code
+  review, reliability/security hardening, and end-to-end validation during
+  the second engineering phase
+- **Research focus**: autonomous repository inspection, architecture
+  decisions, implementation, debugging, test generation, execution and
+  verification, autonomous error recovery, security reasoning, UI/UX
+  improvement, and maintainability.
+
+Results are documented per task and are not interpreted as a direct
+model-vs-model benchmark unless both models are evaluated on the same
+codebase under comparable conditions.
+
 ## What it does
 
 PulseWatch periodically checks your HTTP endpoints, records the results, automatically opens and resolves **incidents** when endpoints go down and recover, and exposes:
@@ -14,14 +33,16 @@ PulseWatch periodically checks your HTTP endpoints, records the results, automat
 
 | Area | Details |
 |---|---|
-| Monitoring | HTTP/HTTPS checks (GET/HEAD), expected-status matching, configurable 10s–1h intervals, timeouts |
+| Monitoring | HTTP/HTTPS checks (GET/HEAD), expected-status matching, configurable 10s–1h intervals, per-monitor timeouts (500ms–30s) |
+| Incident engine | Hysteresis: configurable failure/recovery thresholds (1–10); degraded state between healthy and down; transactional open/resolve so concurrent workers cannot corrupt state |
+| Failure reasons | Classified errors: DNS failure, connection refused/reset, timeout, TLS certificate errors (expired, self-signed, hostname mismatch) |
 | Incident engine | Transactional open-on-first-failure / resolve-on-recovery; repeated failures update the open incident instead of duplicating it |
 | Scheduling | Background worker ticks on an interval, finds due monitors via SQL, runs checks concurrently with per-monitor in-flight locking |
 | Auth | bcrypt password hashing, JWT bearer tokens, per-user monitor ownership (cross-user access returns 404, not 403, to avoid existence leaks) |
 | Validation | Zod schemas at every write boundary with structured `validation_error` responses |
 | Real-time | SSE streams (`/api/stream`, `/api/public/stream`) with keep-alive pings and per-user event filtering |
 | Observability | Structured JSON logs (request IDs, check outcomes, lifecycle events), health endpoint |
-| Security | Security headers, JSON body size limit, no stack traces in production errors, env-based secrets |
+| Security | Security headers, JSON body size limit, no stack traces in production errors, env-based secrets, in-memory rate limiting on auth endpoints (10 req/min/IP), public page sanitization (no URLs/IPs/user data) |
 | Data | SQLite (WAL mode) with foreign keys, cascading deletes, and indexes for history queries |
 
 ## Architecture
