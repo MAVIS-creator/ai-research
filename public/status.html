@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status — PulseWatch</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="status-body">
+  <main class="container narrow">
+    <header class="status-header">
+      <h1>⚡ Service Status</h1>
+      <p id="overall-banner" class="banner" role="status">Loading…</p>
+    </header>
+
+    <section aria-label="Monitors">
+      <div id="status-list" class="monitor-list"></div>
+    </section>
+
+    <section aria-label="Recent incidents">
+      <h2>Recent incidents</h2>
+      <div id="incident-list"></div>
+    </section>
+
+    <footer class="muted small center">
+      Powered by PulseWatch · auto-refreshes live
+    </footer>
+  </main>
+  <script type="module" src="/js/status.js"></script>
+</body>
+</html>
