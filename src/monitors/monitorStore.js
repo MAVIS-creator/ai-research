@@ -9,6 +9,9 @@ const rowToMonitor = (r) => ({
   method: r.method,
   expectedStatus: r.expected_status,
   intervalSeconds: r.interval_seconds,
+  timeoutMs: r.timeout_ms,
+  failureThreshold: r.failure_threshold,
+  recoveryThreshold: r.recovery_threshold,
   enabled: !!r.enabled,
   createdAt: r.created_at,
   updatedAt: r.updated_at,
@@ -28,18 +31,33 @@ export function getMonitor(id, userId) {
 
 export function createMonitor(userId, data) {
   const id = randomUUID();
+  // Store-level defaults so direct callers (seed script, tests) are safe
+  // even though the API layer applies Zod defaults first.
+  const d = {
+    method: 'GET',
+    expectedStatus: 200,
+    intervalSeconds: 60,
+    timeoutMs: 8000,
+    failureThreshold: 2,
+    recoveryThreshold: 2,
+    enabled: true,
+    ...data,
+  };
   db.prepare(
-    `INSERT INTO monitors (id, user_id, name, url, method, expected_status, interval_seconds, enabled)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO monitors (id, user_id, name, url, method, expected_status, interval_seconds, timeout_ms, failure_threshold, recovery_threshold, enabled)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   ).run(
     id,
     userId,
-    data.name,
-    data.url,
-    data.method,
-    data.expectedStatus,
-    data.intervalSeconds,
-    data.enabled ? 1 : 0
+    d.name,
+    d.url,
+    d.method,
+    d.expectedStatus,
+    d.intervalSeconds,
+    d.timeoutMs,
+    d.failureThreshold,
+    d.recoveryThreshold,
+    d.enabled ? 1 : 0
   );
   return getMonitor(id, userId);
 }
@@ -49,7 +67,7 @@ export function updateMonitor(id, userId, patch) {
   if (!existing) return null;
   const next = { ...existing, ...patch };
   db.prepare(
-    `UPDATE monitors SET name=?, url=?, method=?, expected_status=?, interval_seconds=?, enabled=?, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')
+    `UPDATE monitors SET name=?, url=?, method=?, expected_status=?, interval_seconds=?, timeout_ms=?, failure_threshold=?, recovery_threshold=?, enabled=?, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')
      WHERE id=? AND user_id=?`
   ).run(
     next.name,
@@ -57,6 +75,9 @@ export function updateMonitor(id, userId, patch) {
     next.method,
     next.expectedStatus,
     next.intervalSeconds,
+    next.timeoutMs,
+    next.failureThreshold,
+    next.recoveryThreshold,
     next.enabled ? 1 : 0,
     id,
     userId
