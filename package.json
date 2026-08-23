@@ -21,6 +21,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "supertest": "^7.0.0",
     "vitest": "^3.2.7"
   }
