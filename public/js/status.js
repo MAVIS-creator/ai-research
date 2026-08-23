@@ -14,16 +14,24 @@ function render(data) {
 
   $('#status-list').innerHTML = data.monitors
     .map((m) => {
-      const state = m.state === 'up' && m.lastCheck ? 'up' : m.state;
+      // 90 hourly bars, oldest → newest; fill gaps with empty slots.
+      const bars = (m.uptimeBars ?? []).slice(-90);
+      const barHtml = Array.from({ length: 90 }, (_, i) => {
+        const b = bars[i];
+        if (!b || b.uptimePercent == null) return '<span class="none" title="No data"></span>';
+        const cls = b.uptimePercent >= 99.5 ? '' : b.uptimePercent >= 90 ? 'partial' : 'partial';
+        return `<span class="${cls}" title="${esc(b.hour)} — ${b.uptimePercent}% (${b.totalChecks} checks)"></span>`;
+      }).join('');
       return `
       <article class="monitor-item">
         <div class="monitor-main">
           <div class="monitor-name">${esc(m.name)}</div>
-          ${m.openIncident ? `<div class="error-text small">${esc(m.openIncident.lastError ?? 'Unreachable')}</div>` : ''}
+          ${m.openIncident ? `<div class="error-text small">${esc(m.openIncident.lastError ?? 'Unreachable')} · since ${fmtTime(m.openIncident.startedAt)}</div>` : ''}
           ${m.lastCheck ? `<div class="muted small">Last checked ${fmtTime(m.lastCheck.checkedAt)} · ${m.lastCheck.durationMs}ms</div>` : '<div class="muted small">Awaiting first check</div>'}
+          <div class="uptime-bars" title="Hourly uptime, last 90 hours">${barHtml}</div>
         </div>
         <span class="muted small">${m.uptime24h == null ? '' : `${m.uptime24h.toFixed(2)}% uptime (24h)`}</span>
-        <span class="badge ${state}">${state}</span>
+        <span class="badge ${m.state}">${m.state}</span>
       </article>`;
     })
     .join('');
@@ -55,3 +63,6 @@ async function load() {
 load();
 const es = new EventSource('/api/public/stream');
 es.addEventListener('check', load);
+es.onerror = () => {
+  if (es.readyState === EventSource.CLOSED) setTimeout(() => location.reload(), 5000);
+};
