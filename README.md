@@ -13,7 +13,7 @@
 
 This repository represents an **Autonomous AI Software Engineering Research Benchmark** evaluating state-of-the-art Large Language Models operating as end-to-end autonomous senior software engineers without human code intervention.
 
-Developed by **Gemini 3.7 Flash** (operating within the Google Antigravity Agentic Framework) for an AI engineering benchmark against competitor autonomous agent platforms, **NexusFlow Enterprise** demonstrates production-grade autonomous systems design, zero-dependency engine primitives, hardened VM sandboxing, distributed saga rollbacks, and multi-provider AI reasoning.
+Developed by **Gemini 3.7 Flash** (operating within the Google Antigravity Agentic Framework) for an AI engineering research benchmark against competitor **Stealth\Ox Alpha**, **NexusFlow Enterprise** demonstrates production-grade autonomous systems design, zero-dependency engine primitives, hardened VM sandboxing, distributed saga rollbacks, and multi-provider AI reasoning.
 
 ---
 
