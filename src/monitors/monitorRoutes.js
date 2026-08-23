@@ -33,9 +33,19 @@ router.get('/:id', (req, res) => {
     monitor,
     uptime24h: incidents.uptimePercent(monitor.id, 24),
     uptime7d: incidents.uptimePercent(monitor.id, 168),
+    stats: incidents.monitorStats(monitor.id),
+    responseTimeSeries: incidents.responseTimeSeries(monitor.id, { windowHours: 24, buckets: 48 }),
     recentChecks: incidents.recentChecks(monitor.id, 50),
     incidents: incidents.listIncidents(monitor.id, { limit: 25 }),
   });
+});
+
+router.get('/:id/response-times', (req, res) => {
+  const monitor = store.getMonitor(req.params.id, req.user.id);
+  if (!monitor) return res.status(404).json({ error: 'not_found', message: 'Monitor not found' });
+  const hours = Math.min(Number.parseInt(req.query.hours ?? '24', 10) || 24, 168);
+  const buckets = Math.min(Number.parseInt(req.query.buckets ?? '48', 10) || 48, 200);
+  res.json({ series: incidents.responseTimeSeries(monitor.id, { windowHours: hours, buckets }) });
 });
 
 router.patch('/:id', validateBody(monitorUpdateSchema), (req, res) => {
