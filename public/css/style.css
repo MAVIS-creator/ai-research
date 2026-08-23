@@ -134,8 +134,55 @@ input:focus-visible, select:focus-visible, .btn:focus-visible, a:focus-visible {
 }
 .badge.up { background: rgba(52, 211, 153, 0.15); color: var(--up); }
 .badge.down { background: rgba(248, 113, 113, 0.15); color: var(--down); }
-.badge.paused { background: rgba(251, 191, 36, 0.15); color: var(--paused); }
+.badge.degraded { background: rgba(251, 191, 36, 0.18); color: var(--paused); }
+.badge.paused { background: rgba(147, 160, 194, 0.15); color: var(--muted); }
 .badge.pending { background: rgba(147, 160, 194, 0.15); color: var(--muted); }
+
+/* Response-time bar chart */
+.rt-chart { display: flex; align-items: flex-end; gap: 2px; height: 56px; margin-top: 0.5rem; }
+.rt-chart .bar {
+  flex: 1;
+  min-width: 3px;
+  background: linear-gradient(180deg, var(--accent), #3a5fd9);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.85;
+}
+.rt-chart .bar.has-down { background: linear-gradient(180deg, var(--down), #b91c1c); }
+.rt-chart .bar.empty { background: var(--surface-2); height: 3px !important; }
+.rt-axis { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.7rem; margin-top: 0.25rem; }
+
+/* Activity feed */
+.activity-item {
+  display: flex; gap: 0.6rem; align-items: baseline;
+  padding: 0.45rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; align-self: center; }
+.activity-dot.opened { background: var(--down); }
+.activity-dot.resolved { background: var(--up); }
+.activity-time { color: var(--muted); font-size: 0.78rem; margin-left: auto; white-space: nowrap; }
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius);
+  height: 72px; margin-bottom: 0.75rem;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.error-banner {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid var(--down);
+  color: var(--down);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat-inline { display: flex; gap: 1rem; color: var(--muted); font-size: 0.8rem; flex-wrap: wrap; }
 
 .monitor-actions { display: flex; gap: 0.4rem; }
 
@@ -159,7 +206,17 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
 }
 .banner.operational { background: rgba(52, 211, 153, 0.12); color: var(--up); }
 .banner.degraded { background: rgba(248, 113, 113, 0.12); color: var(--down); }
+.banner.warning { background: rgba(251, 191, 36, 0.12); color: var(--paused); }
 .banner.no_monitors, .banner.loading { background: var(--surface); color: var(--muted); }
+
+/* Uptime bars (public page) */
+.uptime-bars { display: flex; gap: 2px; height: 30px; margin-top: 0.5rem; align-items: stretch; }
+.uptime-bars span {
+  flex: 1; min-width: 3px; border-radius: 2px;
+  background: rgba(52, 211, 153, 0.75);
+}
+.uptime-bars span.partial { background: rgba(251, 191, 36, 0.8); }
+.uptime-bars span.none { background: var(--surface-2); }
 
 .incident-item {
   background: var(--surface);
