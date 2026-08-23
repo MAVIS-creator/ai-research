@@ -8,8 +8,9 @@ const router = Router();
  * Server-Sent Events stream of live check results.
  * Auth: either the standard Authorization header (EventSource cannot set
  * headers in browsers, so a token query param is also accepted).
+ * NOTE: mounted at /api/stream, so this handler serves GET /api/stream.
  */
-router.get('/stream', (req, res, next) => {
+router.get('/', (req, res, next) => {
   const token = req.query.token ?? (req.headers.authorization ?? '').replace(/^Bearer\s+/i, '');
   if (!token) {
     return res.status(401).json({ error: 'unauthorized', message: 'Missing token' });
