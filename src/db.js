@@ -54,7 +54,24 @@ export function migrate(database = db) {
       last_error TEXT
     );
     CREATE INDEX IF NOT EXISTS idx_incidents_monitor ON incidents(monitor_id, started_at DESC);
+
+    CREATE TABLE IF NOT EXISTS schema_meta (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
   `);
+
+  // --- Incremental migrations (CREATE IF NOT EXISTS won't alter existing tables) ---
+  const monitorCols = database.prepare('PRAGMA table_info(monitors)').all().map((c) => c.name);
+  if (!monitorCols.includes('timeout_ms')) {
+    database.exec('ALTER TABLE monitors ADD COLUMN timeout_ms INTEGER NOT NULL DEFAULT 8000 CHECK (timeout_ms BETWEEN 500 AND 30000)');
+  }
+  if (!monitorCols.includes('failure_threshold')) {
+    database.exec("ALTER TABLE monitors ADD COLUMN failure_threshold INTEGER NOT NULL DEFAULT 2 CHECK (failure_threshold BETWEEN 1 AND 10)");
+  }
+  if (!monitorCols.includes('recovery_threshold')) {
+    database.exec("ALTER TABLE monitors ADD COLUMN recovery_threshold INTEGER NOT NULL DEFAULT 2 CHECK (recovery_threshold BETWEEN 1 AND 10)");
+  }
 }
 
 migrate();
