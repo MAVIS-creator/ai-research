@@ -7,6 +7,7 @@ import { requestLogger, logger } from './logger.js';
 import authRoutes from './auth/authRoutes.js';
 import monitorRoutes from './monitors/monitorRoutes.js';
 import streamRoutes from './monitors/streamRoutes.js';
+import webhookRoutes from './monitors/webhookRoutes.js';
 import publicStatusRoutes from './publicStatus/publicStatusRoutes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -33,6 +34,7 @@ export function createApp() {
 
   app.use('/api/auth', authRoutes);
   app.use('/api/monitors', monitorRoutes);
+  app.use('/api/webhooks', webhookRoutes);
   app.use('/api/stream', streamRoutes);
   app.use('/api/public', publicStatusRoutes);
 

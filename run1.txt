@@ -1,0 +1,437 @@
+﻿
+> pulsewatch@1.0.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv3.2.7 [39m[90mC:/Users/akint/Documents/Coding/alpha[39m
+
+[90mstdout[2m | tests/webhooks.test.js
+[22m[39m{"ts":"2026-08-23T21:32:38.208Z","level":"info","msg":"user_registered","requestId":"bf67e1cf-77dd-4386-8367-f8db07bfa8d4","userId":"2c8d546b-281c-4df9-bea6-422b01485d7f"}
+{"ts":"2026-08-23T21:32:38.242Z","level":"info","msg":"http_request","requestId":"bf67e1cf-77dd-4386-8367-f8db07bfa8d4","method":"POST","path":"/api/auth/register","status":201,"durationMs":68}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mcreates a webhook with defaults
+[22m[39m{"ts":"2026-08-23T21:32:38.371Z","level":"info","msg":"webhook_created","requestId":"7a764c30-8aad-469a-a794-a1e625727679","webhookId":"d3969cfe-03c5-4ca2-b30b-4f0e66374112"}
+{"ts":"2026-08-23T21:32:38.372Z","level":"info","msg":"http_request","requestId":"7a764c30-8aad-469a-a794-a1e625727679","method":"POST","path":"/api/webhooks","status":201,"durationMs":16}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mrejects invalid webhook URLs and bad event names
+[22m[39m{"ts":"2026-08-23T21:32:38.415Z","level":"info","msg":"http_request","requestId":"e7845abe-723a-4a8a-8662-d503afba04d2","method":"POST","path":"/api/webhooks","status":400,"durationMs":7}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mrejects invalid webhook URLs and bad event names
+[22m[39m{"ts":"2026-08-23T21:32:38.438Z","level":"info","msg":"http_request","requestId":"c05f5f9b-77b0-4455-a3a4-fc3c85096f87","method":"POST","path":"/api/webhooks","status":400,"durationMs":5}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mrequires auth
+[22m[39m{"ts":"2026-08-23T21:32:38.457Z","level":"info","msg":"http_request","requestId":"da4b836e-5b83-4e3d-a2d4-7cdf7d9fbe94","method":"GET","path":"/api/webhooks","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mlists only own webhooks
+[22m[39m{"ts":"2026-08-23T21:32:38.489Z","level":"info","msg":"user_registered","requestId":"202781b3-c954-4652-927d-2694dfcbcc51","userId":"f388dd6b-20e7-4aae-82ae-fa627a27b3cb"}
+{"ts":"2026-08-23T21:32:38.491Z","level":"info","msg":"http_request","requestId":"202781b3-c954-4652-927d-2694dfcbcc51","method":"POST","path":"/api/auth/register","status":201,"durationMs":10}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mlists only own webhooks
+[22m[39m{"ts":"2026-08-23T21:32:38.513Z","level":"info","msg":"http_request","requestId":"edbda0eb-fdb1-4a10-94f1-7f72a8305209","method":"GET","path":"/api/webhooks","status":200,"durationMs":5}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mdeletes a webhook
+[22m[39m{"ts":"2026-08-23T21:32:38.541Z","level":"info","msg":"webhook_created","requestId":"0c6760d6-207b-40a2-a1eb-15ff958fcd5e","webhookId":"b6b84d69-7c77-4bf9-a3f4-d56c2d73bff1"}
+{"ts":"2026-08-23T21:32:38.545Z","level":"info","msg":"http_request","requestId":"0c6760d6-207b-40a2-a1eb-15ff958fcd5e","method":"POST","path":"/api/webhooks","status":201,"durationMs":7}
+
+npm.cmd : [90mstderr[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD 
++ ownership[2m > [22m[2mdeletes a webhook
+At line:1 char:1
++ & "C:\Program Files\nodejs\npm.cmd" test 2>&1 | Out-File -Encoding ut ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...letes a webhook 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39m{"ts":"2026-08-23T21:32:38.570Z","level":"warn","msg":"webhook_delete
+d","requestId":"67725690-e8c1-499a-83d6-f89eb42f6e58","webhookId":"b6b84d69-7c7
+7-4bf9-a3f4-d56c2d73bff1"}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook CRUD + ownership[2m > [22m[2mdeletes a webhook
+[22m[39m{"ts":"2026-08-23T21:32:38.572Z","level":"info","msg":"http_request","requestId":"67725690-e8c1-499a-83d6-f89eb42f6e58","method":"DELETE","path":"/api/webhooks/b6b84d69-7c77-4bf9-a3f4-d56c2d73bff1","status":204,"durationMs":8}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mdelivers signed incident.opened and incident.resolved events
+[22m[39m{"ts":"2026-08-23T21:32:38.606Z","level":"info","msg":"webhook_created","requestId":"26eb0292-cfcb-42fe-a129-6db69018fac8","webhookId":"3b308cda-bd58-46f3-ae5b-33ab6a387192"}
+{"ts":"2026-08-23T21:32:38.607Z","level":"info","msg":"http_request","requestId":"26eb0292-cfcb-42fe-a129-6db69018fac8","method":"POST","path":"/api/webhooks","status":201,"durationMs":16}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mdoes NOT deliver on ordinary checks without transitions
+[22m[39m{"ts":"2026-08-23T21:32:38.804Z","level":"info","msg":"webhook_delivered","webhookId":"d3969cfe-03c5-4ca2-b30b-4f0e66374112","event":"incident.opened","ok":true,"responseStatus":200,"durationMs":181}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mdoes NOT deliver on ordinary checks without transitions
+[22m[39m{"ts":"2026-08-23T21:32:38.812Z","level":"info","msg":"webhook_delivered","webhookId":"3b308cda-bd58-46f3-ae5b-33ab6a387192","event":"incident.opened","ok":true,"responseStatus":200,"durationMs":152}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mdoes NOT deliver on ordinary checks without transitions
+[22m[39m{"ts":"2026-08-23T21:32:38.867Z","level":"info","msg":"webhook_delivered","webhookId":"d3969cfe-03c5-4ca2-b30b-4f0e66374112","event":"incident.resolved","ok":true,"responseStatus":200,"durationMs":134}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mdoes NOT deliver on ordinary checks without transitions
+[22m[39m{"ts":"2026-08-23T21:32:38.874Z","level":"info","msg":"webhook_delivered","webhookId":"3b308cda-bd58-46f3-ae5b-33ab6a387192","event":"incident.resolved","ok":true,"responseStatus":200,"durationMs":138}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords delivery outcomes in the deliveries log
+[22m[39m{"ts":"2026-08-23T21:32:39.111Z","level":"info","msg":"http_request","requestId":"c8d2da34-ce38-48c9-9a5d-7b65bb4305d2","method":"GET","path":"/api/webhooks","status":200,"durationMs":5}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords delivery outcomes in the deliveries log
+[22m[39m{"ts":"2026-08-23T21:32:39.147Z","level":"info","msg":"http_request","requestId":"acd580af-03ef-42fa-b916-3697f34743e1","method":"GET","path":"/api/webhooks/d3969cfe-03c5-4ca2-b30b-4f0e66374112/deliveries","status":200,"durationMs":19}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords failed deliveries for unreachable endpoints
+[22m[39m{"ts":"2026-08-23T21:32:39.189Z","level":"info","msg":"webhook_created","requestId":"c6f7e312-2993-4483-8e2d-90e75e0a1066","webhookId":"c3434d29-e775-427c-87b4-f27b3b4fb543"}
+{"ts":"2026-08-23T21:32:39.190Z","level":"info","msg":"http_request","requestId":"c6f7e312-2993-4483-8e2d-90e75e0a1066","method":"POST","path":"/api/webhooks","status":201,"durationMs":4}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords failed deliveries for unreachable endpoints
+[22m[39m{"ts":"2026-08-23T21:32:39.231Z","level":"info","msg":"webhook_delivered","webhookId":"c3434d29-e775-427c-87b4-f27b3b4fb543","event":"incident.opened","ok":false,"responseStatus":null,"durationMs":17}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords failed deliveries for unreachable endpoints
+[22m[39m{"ts":"2026-08-23T21:32:39.286Z","level":"info","msg":"webhook_delivered","webhookId":"d3969cfe-03c5-4ca2-b30b-4f0e66374112","event":"incident.opened","ok":true,"responseStatus":200,"durationMs":81}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords failed deliveries for unreachable endpoints
+[22m[39m{"ts":"2026-08-23T21:32:39.296Z","level":"info","msg":"webhook_delivered","webhookId":"3b308cda-bd58-46f3-ae5b-33ab6a387192","event":"incident.opened","ok":true,"responseStatus":200,"durationMs":90}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mwebhook delivery on incident transitions[2m > [22m[2mrecords failed deliveries for unreachable endpoints
+[22m[39m{"ts":"2026-08-23T21:32:40.034Z","level":"info","msg":"http_request","requestId":"2684fd6b-ae3b-4713-80b9-c367b42eb88e","method":"GET","path":"/api/webhooks/c3434d29-e775-427c-87b4-f27b3b4fb543/deliveries","status":200,"durationMs":2}
+
+[90mstdout[2m | tests/webhooks.test.js[2m > [22m[2mcheck retention[2m > [22m[2mprunes checks older than the retention window
+[22m[39m{"ts":"2026-08-23T21:32:40.200Z","level":"info","msg":"retention_pruned","deletedChecks":1,"cutoff":"2026-07-24T21:32:40.196Z"}
+
+ [31mΓ¥»[39m tests/webhooks.test.js [2m([22m[2m10 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 2188[2mms[22m[39m
+   [32mΓ£ô[39m webhook CRUD + ownership[2m > [22mcreates a webhook with defaults[32m 54[2mms[22m[39m
+   [32mΓ£ô[39m webhook CRUD + ownership[2m > [22mrejects invalid webhook URLs and bad event names[32m 50[2mms[22m[39m
+   [32mΓ£ô[39m webhook CRUD + ownership[2m > [22mrequires auth[32m 25[2mms[22m[39m
+   [32mΓ£ô[39m webhook CRUD + ownership[2m > [22mlists only own webhooks[32m 55[2mms[22m[39m
+   [32mΓ£ô[39m webhook CRUD + ownership[2m > [22mdeletes a webhook[32m 57[2mms[22m[39m
+[31m   [31m├ù[31m webhook delivery on incident transitions[2m > [22mdelivers signed incident.opened and incident.resolved events[39m[32m 187[2mms[22m[39m
+[31m     ΓåÆ expected 'incident.opened' to be 'incident.resolved' // Object.is equality[39m
+[31m   [31m├ù[31m webhook delivery on incident transitions[2m > [22mdoes NOT deliver on ordinary checks without transitions[39m[33m 323[2mms[22m[39m
+[31m     ΓåÆ expected 4 to be 2 // Object.is equality[39m
+   [32mΓ£ô[39m webhook delivery on incident transitions[2m > [22mrecords delivery outcomes in the deliveries log[32m 65[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m webhook delivery on incident transitions[2m > [22mrecords failed deliveries for unreachable endpoints [33m 883[2mms[22m[39m
+   [32mΓ£ô[39m check retention[2m > [22mprunes checks older than the retention window[32m 166[2mms[22m[39m
+[90mstdout[2m | tests/api.test.js
+[22m[39m{"ts":"2026-08-23T21:32:40.524Z","level":"info","msg":"user_registered","requestId":"37314533-1efb-444a-b63d-817ecbf9fd72","userId":"41cd8147-a1fb-4a65-9a9b-b54b6f7a603a"}
+{"ts":"2026-08-23T21:32:40.527Z","level":"info","msg":"http_request","requestId":"37314533-1efb-444a-b63d-817ecbf9fd72","method":"POST","path":"/api/auth/register","status":201,"durationMs":20}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mhealth[2m > [22m[2mreturns ok
+[22m[39m{"ts":"2026-08-23T21:32:40.537Z","level":"info","msg":"http_request","requestId":"aa7367fa-05b2-4154-b9d1-8115d1217824","method":"GET","path":"/api/health","status":200,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects duplicate registration
+[22m[39m{"ts":"2026-08-23T21:32:40.550Z","level":"info","msg":"http_request","requestId":"30d36b12-77ce-4a74-a026-c506db87d6c5","method":"POST","path":"/api/auth/register","status":409,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects invalid payloads with structured errors
+[22m[39m{"ts":"2026-08-23T21:32:40.562Z","level":"info","msg":"http_request","requestId":"0d1b4b06-72e2-4f78-b888-364e98c8c1d1","method":"POST","path":"/api/auth/register","status":400,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects bad credentials without leaking which factor failed
+[22m[39m{"ts":"2026-08-23T21:32:40.576Z","level":"info","msg":"http_request","requestId":"7d5fdc27-2b3d-4342-ae7e-1d8929f45718","method":"POST","path":"/api/auth/login","status":401,"durationMs":5}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects bad credentials without leaking which factor failed
+[22m[39m{"ts":"2026-08-23T21:32:40.589Z","level":"info","msg":"http_request","requestId":"886b07eb-c5e3-4ece-b321-428cb102ea50","method":"POST","path":"/api/auth/login","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects requests without a token
+[22m[39m{"ts":"2026-08-23T21:32:40.603Z","level":"info","msg":"http_request","requestId":"f355554b-a21d-4001-b3dc-cdd7de5af27a","method":"GET","path":"/api/monitors","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mauth[2m > [22m[2mrejects tampered tokens
+[22m[39m{"ts":"2026-08-23T21:32:40.615Z","level":"info","msg":"http_request","requestId":"54aa42b2-1dce-43e5-9dc2-6a7985f58418","method":"GET","path":"/api/monitors","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mcreates a monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.631Z","level":"info","msg":"monitor_created","requestId":"33418455-f78c-4404-8a32-213d7491eb83","monitorId":"3e9d4223-d8c2-49ca-8bca-af1457a655c4"}
+{"ts":"2026-08-23T21:32:40.632Z","level":"info","msg":"http_request","requestId":"33418455-f78c-4404-8a32-213d7491eb83","method":"POST","path":"/api/monitors","status":201,"durationMs":5}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mrejects invalid URLs and non-http protocols
+[22m[39m{"ts":"2026-08-23T21:32:40.646Z","level":"info","msg":"http_request","requestId":"65a7b6c1-f7bb-4d38-81a3-49a52c0bc13a","method":"POST","path":"/api/monitors","status":400,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mrejects invalid URLs and non-http protocols
+[22m[39m{"ts":"2026-08-23T21:32:40.658Z","level":"info","msg":"http_request","requestId":"225568fa-4800-4f6f-9ffb-18e3dd78e277","method":"POST","path":"/api/monitors","status":400,"durationMs":1}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2menforces interval bounds
+[22m[39m{"ts":"2026-08-23T21:32:40.669Z","level":"info","msg":"http_request","requestId":"04adf935-ab29-4274-b961-af1cc98501e3","method":"POST","path":"/api/monitors","status":400,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mupdates a monitor partially
+[22m[39m{"ts":"2026-08-23T21:32:40.684Z","level":"info","msg":"monitor_updated","requestId":"1728b29f-7446-4cf4-aeaf-7ef19ac12e67","monitorId":"3e9d4223-d8c2-49ca-8bca-af1457a655c4"}
+{"ts":"2026-08-23T21:32:40.685Z","level":"info","msg":"http_request","requestId":"1728b29f-7446-4cf4-aeaf-7ef19ac12e67","method":"PATCH","path":"/api/monitors/3e9d4223-d8c2-49ca-8bca-af1457a655c4","status":200,"durationMs":4}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mprevents access to another user's monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.702Z","level":"info","msg":"user_registered","requestId":"bd8e3a19-27ed-4546-ad4b-e420988e064d","userId":"531bba93-35e0-4b92-8843-4de9d9e04c58"}
+{"ts":"2026-08-23T21:32:40.703Z","level":"info","msg":"http_request","requestId":"bd8e3a19-27ed-4546-ad4b-e420988e064d","method":"POST","path":"/api/auth/register","status":201,"durationMs":8}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mprevents access to another user's monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.720Z","level":"info","msg":"http_request","requestId":"75698191-76e3-4e84-b0ba-6ddc21108ac9","method":"GET","path":"/api/monitors/3e9d4223-d8c2-49ca-8bca-af1457a655c4","status":404,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mdeletes a monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.735Z","level":"info","msg":"http_request","requestId":"1d51f4ca-b44f-4c55-be6f-7ff0a798b254","method":"DELETE","path":"/api/monitors/3e9d4223-d8c2-49ca-8bca-af1457a655c4","status":204,"durationMs":4}
+
+[90mstderr[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + 
+ownership[2m > [22m[2mdeletes a monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.734Z","level":"warn","msg":"monitor_delete
+d","requestId":"1d51f4ca-b44f-4c55-be6f-7ff0a798b254","monitorId":"3e9d4223-d8c
+2-49ca-8bca-af1457a655c4"}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mmonitors CRUD + ownership[2m > [22m[2mdeletes a monitor
+[22m[39m{"ts":"2026-08-23T21:32:40.753Z","level":"info","msg":"http_request","requestId":"46dc8a32-98a5-4c0d-ada8-8bc0d965111c","method":"GET","path":"/api/monitors/3e9d4223-d8c2-49ca-8bca-af1457a655c4","status":404,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents
+[22m[39m{"ts":"2026-08-23T21:32:40.806Z","level":"info","msg":"monitor_created","requestId":"ec99e177-14be-4172-af00-5a41b9fa9a22","monitorId":"700f5e11-3fb7-45d9-b274-7da694934268"}
+{"ts":"2026-08-23T21:32:40.808Z","level":"info","msg":"http_request","requestId":"ec99e177-14be-4172-af00-5a41b9fa9a22","method":"POST","path":"/api/monitors","status":201,"durationMs":14}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mperforms an on-demand check that succeeds
+[22m[39m{"ts":"2026-08-23T21:32:40.838Z","level":"info","msg":"http_request","requestId":"0da13990-59d5-4978-969b-8d2203f68ae5","method":"POST","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/check","status":200,"durationMs":12}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mrecords checks retrievable via history endpoint
+[22m[39m{"ts":"2026-08-23T21:32:40.853Z","level":"info","msg":"http_request","requestId":"8ade33be-1daa-489c-948e-a68398162044","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/checks","status":200,"durationMs":3}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mopens an incident when the target goes down and resolves on recovery
+[22m[39m{"ts":"2026-08-23T21:32:40.870Z","level":"info","msg":"http_request","requestId":"1c859342-2612-4469-add5-1b170342b8fd","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/incidents?open=true","status":200,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mopens an incident when the target goes down and resolves on recovery
+[22m[39m{"ts":"2026-08-23T21:32:40.887Z","level":"info","msg":"http_request","requestId":"d2e6ca02-a8f1-42b6-a39d-e5b954d6852d","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/incidents?open=true","status":200,"durationMs":2}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mopens an incident when the target goes down and resolves on recovery
+[22m[39m{"ts":"2026-08-23T21:32:40.937Z","level":"info","msg":"http_request","requestId":"cde5a91c-1b36-4ef5-8482-a0d77dcdfecf","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/incidents?open=true","status":200,"durationMs":3}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mopens an incident when the target goes down and resolves on recovery
+[22m[39m{"ts":"2026-08-23T21:32:41.292Z","level":"info","msg":"http_request","requestId":"d7bd7cfe-f7f4-461b-b850-2792ded9ae6e","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/incidents?open=true","status":200,"durationMs":38}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mchecking & incidents[2m > [22m[2mopens an incident when the target goes down and resolves on recovery
+[22m[39m{"ts":"2026-08-23T21:32:41.366Z","level":"info","msg":"http_request","requestId":"6203faef-261a-4942-b264-0d47bc947472","method":"GET","path":"/api/monitors/700f5e11-3fb7-45d9-b274-7da694934268/incidents?open=true","status":200,"durationMs":13}
+
+[90mstdout[2m | tests/api.test.js[2m > [22m[2mpublic status page[2m > [22m[2maggregates status without authentication
+[22m[39m{"ts":"2026-08-23T21:32:41.451Z","level":"info","msg":"http_request","requestId":"e677a3e4-bafb-423e-aedc-03baf1dd3065","method":"GET","path":"/api/public/status","status":200,"durationMs":15}
+
+ [32mΓ£ô[39m tests/api.test.js [2m([22m[2m17 tests[22m[2m)[22m[33m 985[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m checking & incidents[2m > [22mopens an incident when the target goes down and resolves on recovery [33m 530[2mms[22m[39m
+ [31mΓ¥»[39m tests/worker.test.js [2m([22m[2m13 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[33m 10468[2mms[22m[39m
+   [32mΓ£ô[39m failure classification[2m > [22mclassifies DNS failures[32m 1[2mms[22m[39m
+   [32mΓ£ô[39m failure classification[2m > [22mclassifies connection refused[32m 1[2mms[22m[39m
+   [32mΓ£ô[39m failure classification[2m > [22mclassifies abort as timeout[32m 1[2mms[22m[39m
+   [32mΓ£ô[39m performCheck against real failure modes[2m > [22mdetects HTTP 500 as down with a useful reason[32m 32[2mms[22m[39m
+[31m   [31m├ù[31m performCheck against real failure modes[2m > [22mdetects timeout on slow responses and respects per-monitor timeout[39m[33m 2094[2mms[22m[39m
+[31m     ΓåÆ expected 1931 to be less than 1400[39m
+[31m   [31m├ù[31m performCheck against real failure modes[2m > [22msucceeds when the target recovers[39m[33m 4806[2mms[22m[39m
+[31m     ΓåÆ expected 'down' to be 'up' // Object.is equality[39m
+[31m   [31m├ù[31m performCheck against real failure modes[2m > [22mreports DNS failure for unresolvable hosts[39m[33m 1256[2mms[22m[39m
+[31m     ΓåÆ expected 'timed out after timeout window' to match /dns|lookup/[39m
+   [32mΓ£ô[39m performCheck against real failure modes[2m > [22mreports connection refused for closed ports[32m 19[2mms[22m[39m
+   [32mΓ£ô[39m incident lifecycle with thresholds[2m > [22mdoes NOT open an incident on first failure (threshold=2)[32m 137[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m incident lifecycle with thresholds[2m > [22mopens exactly ONE incident regardless of how many extra failures occur [33m 911[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m incident lifecycle with thresholds[2m > [22mrequires recovery_threshold consecutive successes to resolve [33m 458[2mms[22m[39m
+   [32mΓ£ô[39m incident lifecycle with thresholds[2m > [22ma single failure during recovery does not resolve the incident[32m 219[2mms[22m[39m
+   [32mΓ£ô[39m incident lifecycle with thresholds[2m > [22mhandles concurrent recordCheck calls without duplicating incidents[32m 206[2mms[22m[39m
+[90mstdout[2m | tests/security.test.js
+[22m[39m{"ts":"2026-08-23T21:32:54.440Z","level":"info","msg":"user_registered","requestId":"b7c28d33-698a-42aa-acfc-92de71c63e46","userId":"885e5f13-2dfa-4cd4-b4b5-b87c5085d297"}
+{"ts":"2026-08-23T21:32:54.444Z","level":"info","msg":"http_request","requestId":"b7c28d33-698a-42aa-acfc-92de71c63e46","method":"POST","path":"/api/auth/register","status":201,"durationMs":37}
+
+[90mstdout[2m | tests/security.test.js
+[22m[39m{"ts":"2026-08-23T21:32:55.274Z","level":"info","msg":"user_registered","requestId":"3020f306-dc84-42f5-a12d-bfdb4a406612","userId":"e4eb623c-7050-46a0-8db8-ba90056d664b"}
+{"ts":"2026-08-23T21:32:55.286Z","level":"info","msg":"http_request","requestId":"3020f306-dc84-42f5-a12d-bfdb4a406612","method":"POST","path":"/api/auth/register","status":201,"durationMs":793}
+
+[90mstdout[2m | tests/security.test.js
+[22m[39m{"ts":"2026-08-23T21:32:55.351Z","level":"info","msg":"monitor_created","requestId":"7ede6b60-86cd-4baa-a074-6b3df1d3b90c","monitorId":"f6264a4e-4b95-4204-b1a8-03bb6e3bc617"}
+{"ts":"2026-08-23T21:32:55.352Z","level":"info","msg":"http_request","requestId":"7ede6b60-86cd-4baa-a074-6b3df1d3b90c","method":"POST","path":"/api/monitors","status":201,"durationMs":14}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.534Z","level":"info","msg":"http_request","requestId":"8ab5f3c5-fe83-4a37-b2de-cf9a75bd0f7d","method":"POST","path":"/api/auth/login","status":401,"durationMs":16}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.675Z","level":"info","msg":"http_request","requestId":"444ed671-b96f-45a8-82b0-ee27ace109f5","method":"POST","path":"/api/auth/login","status":401,"durationMs":7}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.726Z","level":"info","msg":"http_request","requestId":"e4c2e81f-56fc-4366-9fbf-a602b3820bfc","method":"POST","path":"/api/auth/login","status":401,"durationMs":3}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.766Z","level":"info","msg":"http_request","requestId":"fa7fd662-cac0-425e-887f-f8bb6a2aa0b5","method":"POST","path":"/api/auth/login","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.788Z","level":"info","msg":"http_request","requestId":"53c01582-6876-41d2-95ec-b88abe1088d0","method":"POST","path":"/api/auth/login","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.806Z","level":"info","msg":"http_request","requestId":"89ea7470-6b64-40a1-9aad-d534589bb8f9","method":"POST","path":"/api/auth/login","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.824Z","level":"info","msg":"http_request","requestId":"b53dafed-355f-41b4-a96c-1a89de342f5b","method":"POST","path":"/api/auth/login","status":401,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.850Z","level":"info","msg":"http_request","requestId":"bd5786a9-bcdb-4a49-a576-13ab1ab8f864","method":"POST","path":"/api/auth/login","status":401,"durationMs":1}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mrate limiting on auth endpoints[2m > [22m[2mreturns 429 after exceeding the attempt limit
+[22m[39m{"ts":"2026-08-23T21:32:55.870Z","level":"info","msg":"http_request","requestId":"6c64fcd7-2e86-4b41-8a2d-4d1662c9bb9c","method":"POST","path":"/api/auth/login","status":429,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot READ user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:55.891Z","level":"info","msg":"http_request","requestId":"01d6adf1-fc61-44d8-89be-0a28bd62be14","method":"GET","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617","status":404,"durationMs":3}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot UPDATE user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:55.940Z","level":"info","msg":"http_request","requestId":"69e665e2-74b0-4e2f-8eca-01e90cb43050","method":"PATCH","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617","status":404,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot UPDATE user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:56.038Z","level":"info","msg":"http_request","requestId":"5f1f5494-de54-4944-8c97-b9727f148d6c","method":"GET","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617","status":200,"durationMs":13}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot DELETE user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:56.059Z","level":"info","msg":"http_request","requestId":"b1915bbe-dfa1-4d96-b80e-7487b2512298","method":"DELETE","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617","status":404,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot DELETE user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:56.087Z","level":"info","msg":"http_request","requestId":"9085c471-c693-4e7e-9633-8f7d239531f9","method":"GET","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617","status":200,"durationMs":6}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot trigger checks on user A's monitor
+[22m[39m{"ts":"2026-08-23T21:32:56.108Z","level":"info","msg":"http_request","requestId":"e491f196-aa31-46f3-8e46-ac83d42e5518","method":"POST","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617/check","status":404,"durationMs":1}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot read user A's check history or incidents
+[22m[39m{"ts":"2026-08-23T21:32:56.137Z","level":"info","msg":"http_request","requestId":"f131bae7-aa25-4896-9824-9e9116144d6b","method":"GET","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617/checks","status":404,"durationMs":4}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser B cannot read user A's check history or incidents
+[22m[39m{"ts":"2026-08-23T21:32:56.173Z","level":"info","msg":"http_request","requestId":"3650c76d-13d3-49ac-aad2-d4e9fed9fe88","method":"GET","path":"/api/monitors/f6264a4e-4b95-4204-b1a8-03bb6e3bc617/incidents","status":404,"durationMs":5}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2muser A's monitor list contains only their own monitors
+[22m[39m{"ts":"2026-08-23T21:32:56.203Z","level":"info","msg":"http_request","requestId":"91018fe4-c3a6-495b-9781-4d7c8321e098","method":"GET","path":"/api/monitors","status":200,"durationMs":4}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2mrejects malformed JWTs and forged tokens signed with the wrong key
+[22m[39m{"ts":"2026-08-23T21:32:56.237Z","level":"info","msg":"http_request","requestId":"1d237b36-071d-4df1-9103-c02376976c0b","method":"GET","path":"/api/monitors","status":401,"durationMs":12}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2mrejects malformed JWTs and forged tokens signed with the wrong key
+[22m[39m{"ts":"2026-08-23T21:32:56.285Z","level":"info","msg":"http_request","requestId":"1dd24ad8-bc63-487e-b78f-d29c3b492841","method":"GET","path":"/api/monitors","status":401,"durationMs":6}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2mrejects other auth schemes (Basic, raw token)
+[22m[39m{"ts":"2026-08-23T21:32:56.402Z","level":"info","msg":"http_request","requestId":"e63056ef-e46e-4013-9d5a-7d1413265d44","method":"GET","path":"/api/monitors","status":401,"durationMs":3}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mauthorization boundaries (IDOR)[2m > [22m[2mrejects other auth schemes (Basic, raw token)
+[22m[39m{"ts":"2026-08-23T21:32:56.420Z","level":"info","msg":"http_request","requestId":"e284b7e4-3d18-4eeb-b235-06c6cde4e870","method":"GET","path":"/api/monitors","status":401,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2minput hardening[2m > [22m[2mrejects unknown-type fields gracefully (no crash)
+[22m[39m{"ts":"2026-08-23T21:32:56.473Z","level":"info","msg":"http_request","requestId":"d9fbe2fd-5953-453b-995b-38716fbc6867","method":"POST","path":"/api/monitors","status":400,"durationMs":2}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2minput hardening[2m > [22m[2mdoes not leak stack traces in error responses
+[22m[39m{"ts":"2026-08-23T21:32:56.532Z","level":"info","msg":"http_request","requestId":"a212e3a9-1945-43e9-9ca0-89fc85addc05","method":"GET","path":"/api/definitely-not-a-route","status":404,"durationMs":10}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mpublic status privacy[2m > [22m[2mnever exposes monitor URLs publicly
+[22m[39m{"ts":"2026-08-23T21:32:56.553Z","level":"info","msg":"http_request","requestId":"79bf457f-95a8-4bb2-9ebc-6a5b3fd5dab9","method":"GET","path":"/api/public/status","status":200,"durationMs":4}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mpublic status privacy[2m > [22m[2mnever exposes user IDs or emails publicly
+[22m[39m{"ts":"2026-08-23T21:32:56.575Z","level":"info","msg":"http_request","requestId":"70bf2f6d-d38f-4c75-9ae4-3bdc0e996b5c","method":"GET","path":"/api/public/status","status":200,"durationMs":3}
+
+[90mstdout[2m | tests/security.test.js[2m > [22m[2mpublic status privacy[2m > [22m[2msanitizes URLs out of public incident errors
+[22m[39m{"ts":"2026-08-23T21:32:56.605Z","level":"info","msg":"http_request","requestId":"7c179f82-aed1-474d-9ff0-e651d2764810","method":"GET","path":"/api/public/status","status":200,"durationMs":2}
+
+ [32mΓ£ô[39m tests/security.test.js [2m([22m[2m16 tests[22m[2m)[22m[33m 2287[2mms[22m[39m
+   [33m[2mΓ£ô[22m[39m rate limiting on auth endpoints[2m > [22mreturns 429 after exceeding the attempt limit [33m 501[2mms[22m[39m
+ [32mΓ£ô[39m tests/validation.test.js [2m([22m[2m3 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 5 
+[49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/webhooks.test.js[2m > [22mwebhook delivery 
+on incident transitions[2m > [22mdelivers signed incident.opened and 
+incident.resolved events
+[31m[1mAssertionError[22m: expected 'incident.opened' to be 
+'incident.resolved' // Object.is equality[39m
+
+Expected: [32m"incident.[7mresolv[27med"[39m
+Received: [31m"incident.[7mopen[27med"[39m
+
+[36m [2mΓ¥»[22m tests/webhooks.test.js:[2m145:31[22m[39m
+    [90m143| [39m    [34mrecordCheck[39m(monitorId[33m,[39m 
+[34mok[39m())[33m;[39m [90m// recovery threshold 2 ΓåÆ resolves[39m
+    [90m144| [39m    [35mawait[39m 
+[34mwaitForDeliveries[39m([34m2[39m)[33m;[39m
+    [90m145| [39m    [34mexpect[39m(received[[34m1[39m][33m.[39mevent)
+[33m.[39m[34mtoBe[39m([32m'incident.resolved'[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m146| [39m    [90m// Resolved delivery is also signed.[39m
+    [90m147| [39m    const expectedResolved = createHmac('sha256', 
+'super-secret-signinΓÇª
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[1/5]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/webhooks.test.js[2m > [22mwebhook delivery 
+on incident transitions[2m > [22mdoes NOT deliver on ordinary checks without 
+transitions
+[31m[1mAssertionError[22m: expected 4 to be 2 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 2[39m
+[31m+ 4[39m
+
+[36m [2mΓ¥»[22m tests/webhooks.test.js:[2m155:29[22m[39m
+    [90m153| [39m    recordCheck(monitorId, { status: 'up', httpStatus: 200, 
+durationMsΓÇª
+    [90m154| [39m    [35mawait[39m [35mnew[39m [33mPromise[39m((r) 
+[33m=>[39m [34msetTimeout[39m(r[33m,[39m [34m300[39m))[33m;[39m
+    [90m155| [39m    [34mexpect[39m(received[33m.[39mlength)[33m.[39m[
+34mtoBe[39m(before)[33m;[39m
+    [90m   | [39m                            [31m^[39m
+    [90m156| [39m  })[33m;[39m
+    [90m157| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[2/5]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/worker.test.js[2m > [22mperformCheck against 
+real failure modes[2m > [22mdetects timeout on slow responses and respects 
+per-monitor timeout
+[31m[1mAssertionError[22m: expected 1931 to be less than 1400[39m
+[36m [2mΓ¥»[22m tests/worker.test.js:[2m96:34[22m[39m
+    [90m 94| [39m    [34mexpect[39m(result[33m.[39merror)[33m.[39m[34m
+toContain[39m([32m'Timed out'[39m)[33m;[39m
+    [90m 95| [39m    [90m// Should abort near the 500ms timeout, not wait 
+the full 1500ms.[39m
+    [90m 96| [39m    
+[34mexpect[39m([33mDate[39m[33m.[39m[34mnow[39m() [33m-[39m 
+started)[33m.[39m[34mtoBeLessThan[39m([34m1400[39m)[33m;[39m
+    [90m   | [39m                                 [31m^[39m
+    [90m 97| [39m  })[33m;[39m
+    [90m 98| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[3/5]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/worker.test.js[2m > [22mperformCheck against 
+real failure modes[2m > [22msucceeds when the target recovers
+[31m[1mAssertionError[22m: expected 'down' to be 'up' // Object.is 
+equality[39m
+
+Expected: [32m"up"[39m
+Received: [31m"down"[39m
+
+[36m [2mΓ¥»[22m tests/worker.test.js:[2m103:27[22m[39m
+    [90m101| [39m    [35mconst[39m m [33m=[39m [34mmakeMonitor[39m({ 
+name[33m:[39m [32m'recover-test'[39m })[33m;[39m
+    [90m102| [39m    [35mconst[39m result [33m=[39m [35mawait[39m 
+[34mperformCheck[39m(m)[33m;[39m
+    [90m103| [39m    [34mexpect[39m(result[33m.[39mstatus)[33m.[39m[34
+mtoBe[39m([32m'up'[39m)[33m;[39m
+    [90m   | [39m                          [31m^[39m
+    [90m104| [39m    [34mexpect[39m(result[33m.[39mhttpStatus)[33m.[39m
+[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m105| [39m    [34mexpect[39m(result[33m.[39mdurationMs)[33m.[39m
+[34mtoBeGreaterThanOrEqual[39m([34m0[39m)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[4/5]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/worker.test.js[2m > [22mperformCheck against 
+real failure modes[2m > [22mreports DNS failure for unresolvable hosts
+[31m[1mAssertionError[22m: expected 'timed out after timeout window' to 
+match /dns|lookup/[39m
+
+[32m- Expected:[39m 
+/dns|lookup/
+
+[31m+ Received:[39m 
+"timed out after timeout window"
+
+[36m [2mΓ¥»[22m tests/worker.test.js:[2m112:40[22m[39m
+    [90m110| [39m    [35mconst[39m result [33m=[39m [35mawait[39m 
+[34mperformCheck[39m(m)[33m;[39m
+    [90m111| [39m    [34mexpect[39m(result[33m.[39mstatus)[33m.[39m[34
+mtoBe[39m([32m'down'[39m)[33m;[39m
+    [90m112| [39m    [34mexpect[39m(result[33m.[39merror[33m.[39m[34mt
+oLowerCase[39m())[33m.[39m[34mtoMatch[39m([36m/dns|lookup/[39m)[33m;[3
+9m
+    [90m   | [39m                                       [31m^[39m
+    [90m113| [39m  }[33m,[39m [34m15_000[39m)[33m;[39m
+    [90m114| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[5/5]ΓÄ»[22m[39m
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[31m5 failed[39m[22m[2m | [22m[1m[32m54 passed[39m[22m[90m (59)[39m
+[2m   Start at [22m 22:32:32
+[2m   Duration [22m 24.00s[2m (transform 2.53s, setup 0ms, collect 5.64s, tests 15.94s, environment 2ms, prepare 537ms)[22m
+

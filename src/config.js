@@ -34,6 +34,7 @@ const config = {
   workerIntervalMs: int('WORKER_INTERVAL_MS', 10_000),
   checkTimeoutMs: int('CHECK_TIMEOUT_MS', 8_000),
   maxIncidentsRetained: int('MAX_INCIDENTS_RETAINED', 500),
+  checkRetentionDays: int('CHECK_RETENTION_DAYS', 30),
   logLevel: process.env.LOG_LEVEL ?? (isProd ? 'info' : 'debug'),
 };
 

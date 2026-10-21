@@ -1,6 +1,8 @@
 import config from './config.js';
 import { createApp } from './app.js';
 import { Scheduler } from './monitors/scheduler.js';
+import { startWebhookDispatcher } from './monitors/webhooks.js';
+import { startRetentionSweeper } from './monitors/retention.js';
 import { logger } from './logger.js';
 
 const app = createApp();
@@ -9,6 +11,8 @@ const scheduler = new Scheduler();
 const server = app.listen(config.port, () => {
   logger.info('server_started', { port: config.port, env: config.env, db: config.dbFile });
   scheduler.start();
+  startWebhookDispatcher();
+  startRetentionSweeper();
 });
 
 function shutdown(signal) {
